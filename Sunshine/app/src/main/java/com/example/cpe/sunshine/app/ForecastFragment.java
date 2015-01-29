@@ -47,7 +47,6 @@ public class ForecastFragment extends Fragment {
 
   public static final String FORECAST_CLICKED_DETAIL = "com.example.clicked.details";
 
-  List<String> listOfFakeData = new ArrayList<>();
   ArrayAdapter<String> adapter;
   public ForecastFragment() {
   }
@@ -59,16 +58,17 @@ public class ForecastFragment extends Fragment {
   }
 
   @Override
+  public void onStart() {
+    super.onStart();
+    updateWeatherData();
+  }
+
+  @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-    listOfFakeData.add("Today - sunny - 88/63");
-    listOfFakeData.add("Tomorrow - sunny - 74/25");
-    listOfFakeData.add("Wednesday - snow - 68/63");
-    listOfFakeData.add("Sunday - rain - 18/72");
-
-    adapter = new ArrayAdapter<>(getActivity().getApplicationContext(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, listOfFakeData);
+    adapter = new ArrayAdapter<>(getActivity().getApplicationContext(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, new ArrayList<String>());
     ListView listView = (ListView) rootView.findViewById(R.id.listview_forecast);
     listView.setAdapter(adapter);
 
@@ -90,11 +90,15 @@ public class ForecastFragment extends Fragment {
     int id = item.getItemId();
 
     if (id == R.id.action_refresh) {
-      SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SettingsActivity.USER_SETTINGS_PREFERENCE, Context.MODE_PRIVATE);
-      String location = sharedPreferences.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
-      new FetchWeatherTast().execute(location);
+      updateWeatherData();
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  private void updateWeatherData() {
+    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SettingsActivity.USER_SETTINGS_PREFERENCE, Context.MODE_PRIVATE);
+    String location = sharedPreferences.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
+    new FetchWeatherTast().execute(location);
   }
 
   @Override
