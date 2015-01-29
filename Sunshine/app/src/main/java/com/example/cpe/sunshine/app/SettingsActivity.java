@@ -1,5 +1,6 @@
 package com.example.cpe.sunshine.app;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -16,6 +17,8 @@ import android.preference.PreferenceManager;
  */
 public class SettingsActivity extends PreferenceActivity
     implements Preference.OnPreferenceChangeListener {
+
+  public static final String USER_SETTINGS_PREFERENCE = "user_settings_preference";
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,10 @@ public class SettingsActivity extends PreferenceActivity
       // For other preferences, set the summary to the value's simple string representation.
       preference.setSummary(stringValue);
     }
+    SharedPreferences.Editor editor = getSharedPreferences(USER_SETTINGS_PREFERENCE, MODE_PRIVATE).edit();
+    editor.putString(preference.getKey(), stringValue);
+    editor.apply();
+
     return true;
   }
 
