@@ -54,7 +54,7 @@ public class SettingsActivity extends PreferenceActivity
   @Override
   public boolean onPreferenceChange(Preference preference, Object value) {
     String stringValue = value.toString();
-
+    //SharedPreferences.Editor editor = getSharedPreferences(USER_SETTINGS_PREFERENCE, MODE_PRIVATE).edit();
     if (preference instanceof ListPreference) {
       // For list preferences, look up the correct display value in
       // the preference's 'entries' list (since they have separate labels/values).
@@ -67,9 +67,8 @@ public class SettingsActivity extends PreferenceActivity
       // For other preferences, set the summary to the value's simple string representation.
       preference.setSummary(stringValue);
     }
-    SharedPreferences.Editor editor = getSharedPreferences(USER_SETTINGS_PREFERENCE, MODE_PRIVATE).edit();
-    editor.putString(preference.getKey(), stringValue);
-    editor.apply();
+    //editor.putString(preference.getKey(), stringValue);
+    //editor.apply();
 
     return true;
   }

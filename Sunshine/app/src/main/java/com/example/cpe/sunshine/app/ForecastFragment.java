@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +39,6 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -223,12 +223,21 @@ public class ForecastFragment extends Fragment {
      * Prepare the weather high/lows for presentation.
      */
     private String formatHighLows(double high, double low) {
+      SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+      String unitKey = preferences.getString(getString(R.string.pref_temperature_units_key), getString(R.string.pref_temperature_default));
+
       // For presentation, assume the user doesn't care about tenths of a degree.
+
+
+      if(unitKey.equals("fahrenheit_selected_key")) {
+        high = (high * 1.8) + 32;
+        low = (low * 1.8) + 32;
+      }
+
       long roundedHigh = Math.round(high);
       long roundedLow = Math.round(low);
 
-      String highLowStr = roundedHigh + "/" + roundedLow;
-      return highLowStr;
+      return roundedHigh + "/" + roundedLow;
     }
 
     /**

@@ -13,5 +13,18 @@
   <!-- Const values-->
   <string name="pref_location_key">location_user_settings</string>
   <string name="pref_location_default">94043</string>
+  <string name="pref_temperature_units_label">Temperature units</string>
+  <string name="pref_temperature_units_key">temperature_units_key</string>
+  <string name="pref_temperature_default">metric_selected_key</string>
 
+  <string-array name="temperature_item_list">
+    <item>Metric</item>
+    <item>Fahrenheit</item>
+  </string-array>
+
+  <string-array name="temperature_item_list_entery">
+    <item>metric_selected_key</item>
+    <item>fahrenheit_selected_key</item>
+  </string-array>
+  
 </resources>
