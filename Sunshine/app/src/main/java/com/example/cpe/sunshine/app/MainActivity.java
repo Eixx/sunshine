@@ -6,11 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class MainActivity extends ActionBarActivity {
+
+  public final String TAG = MainActivity.class.getSimpleName();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,37 @@ public class MainActivity extends ActionBarActivity {
           .add(R.id.container, new ForecastFragment())
           .commit();
     }
+    Log.v(TAG, "onCreate");
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    Log.v(TAG, "onPause");
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    Log.v(TAG, "onStop");
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    Log.v(TAG, "onStart");
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    Log.v(TAG, "onResume");
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    Log.v(TAG, "onDestroy");
   }
 
   @Override
