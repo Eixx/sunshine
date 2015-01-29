@@ -17,6 +17,7 @@
   <string name="pref_temperature_units_key">temperature_units_key</string>
   <string name="pref_temperature_default">metric_selected_key</string>
   <string name="location_on_map_menu">Show map</string>
+  <string name="share_menu_item">Share</string>
 
   <string-array name="temperature_item_list">
     <item>Metric</item>
