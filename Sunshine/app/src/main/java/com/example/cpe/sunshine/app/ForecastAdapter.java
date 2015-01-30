@@ -16,13 +16,27 @@ import android.widget.TextView;
  */
 
 public class ForecastAdapter extends CursorAdapter {
+
+  private static final int VIEW_TYPE_TODAY = 0;
+  private static final int VIEW_TYPE_FUTURE_DAY = 1;
+  private static final int VIEW_TYPE_COUNT = 2;
+
   public ForecastAdapter(Context context, Cursor c, int flags) {
     super(context, c, flags);
   }
 
+  /**
+   * Copy/paste note: Replace existing newView() method in ForecastAdapter with this one.
+   */
   @Override
   public View newView(Context context, Cursor cursor, ViewGroup parent) {
-    return LayoutInflater.from(context).inflate(R.layout.list_item_forecast, parent, false);
+    // Choose the layout type
+    int viewType = getItemViewType(cursor.getPosition());
+    int layoutId = R.layout.list_item_forecast;
+    if(viewType == VIEW_TYPE_TODAY) {
+      layoutId = R.layout.list_item_forecast_today;
+    }
+    return LayoutInflater.from(context).inflate(layoutId, parent, false);
   }
 
   @Override
@@ -59,4 +73,16 @@ public class ForecastAdapter extends CursorAdapter {
     TextView lowTempView = (TextView) view.findViewById(R.id.list_item_low_textview);
     lowTempView.setText(Utility.formatTemperature(low, isMetric));
   }
+
+  @Override
+  public int getItemViewType(int position) {
+    return position == 0 ? VIEW_TYPE_TODAY : VIEW_TYPE_FUTURE_DAY;
+  }
+
+  @Override
+  public int getViewTypeCount() {
+    return VIEW_TYPE_COUNT;
+  }
+
+
 }
