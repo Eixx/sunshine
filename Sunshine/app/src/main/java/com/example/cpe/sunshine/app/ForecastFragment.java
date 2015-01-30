@@ -23,13 +23,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.cpe.sunshine.app.data.WeatherContract;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -37,7 +35,7 @@ import java.util.Date;
  */
 public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-  public static final String FORECAST_CLICKED_DETAIL = "com.example.clicked.details";
+  public static final String DATE_KEY = "com.example.forecast_date.details";
 
   private static final int FORECAST_LOADER = 0;
   // For the forecast view we're showing only a small subset of the stored data.
@@ -143,14 +141,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         SimpleCursorAdapter adapter1 = (SimpleCursorAdapter) parent.getAdapter();
         Cursor cursor = adapter1.getCursor();
         if (cursor != null && cursor.moveToPosition(position)) {
-          boolean isMetric = Utility.isMetric(getActivity());
-          String forecast = String.format("%s - %s - %s/%s",
-              Utility.formatDate(cursor.getString(COL_WEATHER_DATE)),
-              cursor.getString(COL_WEATHER_DESC),
-              Utility.formatTemperature(cursor.getDouble(COL_WEATHER_MAX_TEMP), isMetric),
-              Utility.formatTemperature(cursor.getDouble(COL_WEATHER_MAX_TEMP), isMetric));
           Intent intent = new Intent(getActivity(), DetailActivity.class)
-              .putExtra(FORECAST_CLICKED_DETAIL, forecast);
+              .putExtra(DetailActivity.DATE_KEY, cursor.getString(COL_WEATHER_DATE));
           startActivity(intent);
         }
       }
