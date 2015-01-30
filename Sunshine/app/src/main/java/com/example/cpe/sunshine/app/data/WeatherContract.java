@@ -31,7 +31,7 @@ public class WeatherContract {
   // relationship between a domain name and its website.  A convenient string to use for the
   // content authority is the package name for the app, which is guaranteed to be unique on the
   // device.
-    /* TODO Uncomment for
+    /*
     4b - Adding ContentProvider to our Contract
     https://www.udacity.com/course/viewer#!/c-ud853/l-1576308909/m-1637521471*/
     public static final String CONTENT_AUTHORITY = "com.example.cpe.sunshine.app";
@@ -125,7 +125,7 @@ public class WeatherContract {
 
 
 
-        /* TODO Uncomment for
+        /*
         4b - Adding ContentProvider to our Contract
         https://www.udacity.com/course/viewer#!/c-ud853/l-1576308909/m-1637521471*/
 
@@ -138,7 +138,7 @@ public class WeatherContract {
                 "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_LOCATION;
 
     /**
-     * TODO YOUR CODE BELOW HERE FOR QUIZ
+     *
      * QUIZ - 4b - Adding LocationEntry with ID UriBuilder
      * https://www.udacity.com/course/viewer#!/c-ud853/l-1576308909/e-1604969848/m-1604969849
      **/
@@ -204,7 +204,7 @@ public class WeatherContract {
      */
     public static final String COLUMN_DEGREES = "degrees";
 
-        /* TODO Uncomment for
+        /*
         4b - Adding ContentProvider to our Contract
         https://www.udacity.com/course/viewer#!/c-ud853/l-1576308909/m-1637521471*/
         public static final Uri CONTENT_URI =
