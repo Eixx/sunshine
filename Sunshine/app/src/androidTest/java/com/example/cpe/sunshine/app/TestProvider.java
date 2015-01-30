@@ -79,7 +79,7 @@ public class TestProvider extends AndroidTestCase {
 
      /* TODO Uncomment for
      4b - Implement Location_ID queries
-     https://www.udacity.com/course/viewer#!/c-ud853/l-1576308909/e-1675098551/m-1675098552
+     https://www.udacity.com/course/viewer#!/c-ud853/l-1576308909/e-1675098551/m-1675098552*/
 
      public void testInsertReadProvider() {
 
@@ -169,7 +169,7 @@ public class TestProvider extends AndroidTestCase {
          );
          TestDb.validateCursor(weatherCursor, weatherValues);
      }
-	   */
+
     
     
 
