@@ -66,11 +66,11 @@ public class ForecastAdapter extends CursorAdapter {
     // Read high temperature from cursor
     boolean isMetric = Utility.isMetric(context);
     float high = cursor.getFloat(ForecastFragment.COL_WEATHER_MAX_TEMP);
-    viewHolder.highTempView.setText(Utility.formatTemperature(high, isMetric));
+    viewHolder.highTempView.setText(Utility.formatTemperature(context, high, isMetric));
 
     // Read low temperature from cursor
     float low = cursor.getFloat(ForecastFragment.COL_WEATHER_MIN_TEMP);
-    viewHolder.lowTempView.setText(Utility.formatTemperature(low, isMetric));
+    viewHolder.lowTempView.setText(Utility.formatTemperature(context, low, isMetric));
   }
 
   @Override
