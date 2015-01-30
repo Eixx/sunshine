@@ -68,7 +68,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
   private String mLocation;
 
 
-  SimpleCursorAdapter adapter;
+  ForecastAdapter adapter;
   public ForecastFragment() {
   }
 
@@ -91,54 +91,14 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                            Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-    adapter = new SimpleCursorAdapter(
-        getActivity(),
-        R.layout.list_item_forecast,
-        null,
-        // the column names to use to fill the textviews
-        new String[]{WeatherContract.WeatherEntry.COLUMN_DATETEXT,
-            WeatherContract.WeatherEntry.COLUMN_SHORT_DESC,
-            WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
-            WeatherContract.WeatherEntry.COLUMN_MIN_TEMP
-        },
-        // the textviews to fill with the data pulled from the columns above
-        new int[]{R.id.list_item_date_textview,
-            R.id.list_item_forecast_textview,
-            R.id.list_item_high_textview,
-            R.id.list_item_low_textview
-        },
-        0
-    );
-    adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
-      @Override
-      public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-        boolean isMetric = Utility.isMetric(getActivity());
-        switch (columnIndex) {
-          case COL_WEATHER_MAX_TEMP:
-          case COL_WEATHER_MIN_TEMP: {
-            // we have to do some formatting and possibly a conversion
-            ((TextView) view).setText(Utility.formatTemperature(
-                cursor.getDouble(columnIndex), isMetric));
-            return true;
-          }
-          case COL_WEATHER_DATE: {
-            String dateString = cursor.getString(columnIndex);
-            TextView dateView = (TextView) view;
-            dateView.setText(Utility.formatDate(dateString));
-            return true;
-          }
-        }
-        return false;
-      }
-    });
-
+    adapter = new ForecastAdapter(getActivity(), null, 0);
     ListView listView = (ListView) rootView.findViewById(R.id.listview_forecast);
     listView.setAdapter(adapter);
 
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        SimpleCursorAdapter adapter1 = (SimpleCursorAdapter) parent.getAdapter();
+        ForecastAdapter adapter1 = (ForecastAdapter) parent.getAdapter();
         Cursor cursor = adapter1.getCursor();
         if (cursor != null && cursor.moveToPosition(position)) {
           Intent intent = new Intent(getActivity(), DetailActivity.class)
